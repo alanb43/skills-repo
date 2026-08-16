@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Josh's Bachelor Weekend — Chicago, Sept 12–14, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root{
+    --navy: #0E1520;
+    --navy-panel: #161F2E;
+    --navy-panel-2: #1C2637;
+    --line: #2A3548;
+    --gold: #E3A73A;
+    --gold-dim: #a9812f;
+    --turf: #3E8A63;
+    --red: #C0392B;
+    --paper: #F2EEE3;
+    --paper-dim: #B9BFCB;
+    --muted: #7C879B;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--navy);
+    color:var(--paper);
+    font-family:'Source Serif 4', Georgia, serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px 100px;}
+
+  h1,h2,h3,.eyebrow,.time,.label{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:64px 24px 48px;
+    background:
+      radial-gradient(ellipse 900px 400px at 50% -10%, rgba(227,167,58,0.14), transparent 60%),
+      linear-gradient(180deg, #0B111A 0%, var(--navy) 100%);
+    border-bottom:1px solid var(--line);
+    text-align:center;
+  }
+  .hero .eyebrow{
+    color:var(--gold);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.18em;
+    margin-bottom:18px;
+  }
+  .hero .eyebrow::before,.hero .eyebrow::after{content:"— ";}
+  .hero .eyebrow::after{content:" —";}
+  .hero h1{
+    font-size:56px;
+    font-weight:700;
+    color:var(--paper);
+    margin:0 0 10px;
+    letter-spacing:.01em;
+  }
+  .hero h1 span{color:var(--gold);}
+  .hero .dates{
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--paper-dim);
+    font-size:16px;
+    letter-spacing:.05em;
+  }
+  .roster{
+    margin-top:28px;
+    display:inline-flex;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .chip{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--paper-dim);
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:5px 10px;
+    background:var(--navy-panel);
+  }
+
+  /* ---------- LOGISTICS STRIP ---------- */
+  .logistics{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    margin:40px 0 0;
+    border:1px solid var(--line);
+  }
+  .logistics .cell{background:var(--navy-panel);padding:20px 22px;}
+  .logistics .label{font-size:11px;color:var(--gold);letter-spacing:.14em;margin-bottom:8px;}
+  .logistics .val{font-size:15px;color:var(--paper);}
+  .logistics .val a{color:var(--paper);}
+  .logistics .sub{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--paper-dim);margin-top:6px;}
+
+  /* ---------- SCORECARD / WHAT CHANGED ---------- */
+  .scorecard{
+    margin:48px 0;
+    background:var(--navy-panel);
+    border:1px solid var(--line);
+    border-left:3px solid var(--gold);
+  }
+  .scorecard-head{
+    padding:16px 22px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+  }
+  .scorecard-head h2{font-size:15px;color:var(--gold);margin:0;letter-spacing:.12em;}
+  .scorecard-head .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);}
+  .fix-list{padding:6px 0;}
+  .fix{
+    display:grid;
+    grid-template-columns:26px 1fr;
+    gap:14px;
+    padding:16px 22px;
+    border-bottom:1px solid var(--line);
+  }
+  .fix:last-child{border-bottom:none;}
+  .fix .mark{
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--red);
+    font-weight:600;
+    font-size:14px;
+  }
+  .fix .body b{color:var(--paper);font-weight:600;}
+  .fix .body{font-size:15px;color:var(--paper-dim);}
+  .fix .body .was{color:var(--muted);font-style:italic;}
+
+  /* ---------- DAY BLOCKS ---------- */
+  .day{margin:56px 0 0;}
+  .day-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    border-bottom:2px solid var(--gold);
+    padding-bottom:12px;
+    margin-bottom:4px;
+  }
+  .day-num{
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--gold);
+    font-size:14px;
+    border:1px solid var(--gold-dim);
+    padding:3px 8px;
+  }
+  .day-head h2{font-size:30px;color:var(--paper);margin:0;font-weight:600;}
+  .day-sub{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted);margin:8px 0 20px;letter-spacing:.03em;}
+
+  .event{
+    display:grid;
+    grid-template-columns:88px 1fr;
+    gap:20px;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .event:last-child{border-bottom:none;}
+  .event .time{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:14px;
+    color:var(--gold);
+    font-weight:500;
+    padding-top:2px;
+    white-space:nowrap;
+  }
+  .event .title{
+    font-family:'Oswald',sans-serif;
+    font-size:19px;
+    font-weight:600;
+    color:var(--paper);
+    letter-spacing:.01em;
+    text-transform:none;
+    margin:0 0 6px;
+  }
+  .event .desc{font-size:15px;color:var(--paper-dim);margin:0 0 8px;}
+  a{color:inherit;text-decoration:underline;text-underline-offset:2px;}
+  .event .meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:8px;
+  }
+  .pill{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--paper-dim);
+    background:var(--navy-panel-2);
+    border:1px solid var(--line);
+    padding:4px 9px;
+    border-radius:2px;
+  }
+  .pill.book{color:var(--gold);border-color:var(--gold-dim);}
+  .pill.turf{color:var(--turf);border-color:#2c5a41;}
+  .note{
+    margin-top:10px;
+    font-size:13.5px;
+    color:var(--muted);
+    border-left:2px solid var(--line);
+    padding-left:10px;
+  }
+  .note b{color:var(--paper-dim);}
+
+  .choice-box{
+    background:var(--navy-panel);
+    border:1px dashed var(--line);
+    padding:16px 18px;
+    margin-top:8px;
+    font-size:14px;
+    color:var(--paper-dim);
+  }
+  .choice-box .ch-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.1em;margin-bottom:8px;display:block;}
+  .choice-box ul{margin:0;padding-left:18px;}
+  .choice-box li{margin-bottom:4px;}
+
+  /* ---------- OPEN DECISIONS ---------- */
+  .decisions{
+    margin:56px 0;
+    background:var(--navy-panel);
+    border:1px solid var(--line);
+    border-left:3px solid var(--red);
+  }
+  .decisions-head{padding:16px 22px;border-bottom:1px solid var(--line);}
+  .decisions-head h2{font-size:15px;color:var(--red);margin:0;letter-spacing:.12em;}
+  .decisions ol{margin:0;padding:18px 22px 18px 40px;}
+  .decisions li{margin-bottom:14px;font-size:15px;color:var(--paper-dim);}
+  .decisions li b{color:var(--paper);}
+
+  /* ---------- CONTACT SHEET ---------- */
+  .contacts{margin:56px 0;}
+  .contacts h2{font-size:22px;color:var(--paper);margin:0 0 4px;font-weight:600;}
+  .contacts .day-sub{margin-bottom:20px;}
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:left;
+    padding:10px 14px;
+    border-bottom:1px solid var(--gold-dim);
+  }
+  td{
+    padding:12px 14px;
+    border-bottom:1px solid var(--line);
+    color:var(--paper-dim);
+    vertical-align:top;
+  }
+  td.name{color:var(--paper);font-weight:600;font-family:'Oswald',sans-serif;text-transform:none;letter-spacing:0;font-size:14.5px;}
+  td.mono{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--gold);white-space:nowrap;}
+
+  footer{
+    margin-top:70px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    text-align:center;
+    color:var(--muted);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.05em;
+  }
+
+  /* ---------- DAY MAPS ---------- */
+  .day-map{
+    height:300px;
+    border-radius:2px;
+    margin:16px 0 8px;
+    border:1px solid var(--line);
+    overflow:hidden;
+    background:var(--navy-panel);
+  }
+  .map-caption{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    margin:0 0 28px;
+    letter-spacing:.02em;
+  }
+  .pin-num{
+    width:24px;height:24px;border-radius:50%;
+    background:var(--gold);color:#0E1520;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:12px;
+    border:2px solid #0E1520;
+  }
+  .leaflet-tooltip{
+    background:var(--navy-panel-2) !important;
+    color:var(--paper) !important;
+    border:1px solid var(--line) !important;
+    font-family:'IBM Plex Mono',monospace !important;
+    font-size:12px !important;
+    box-shadow:none !important;
+  }
+  .leaflet-tooltip-top:before{border-top-color:var(--line) !important;}
+
+  @media(max-width:600px){
+    .hero h1{font-size:38px;}
+    .logistics{grid-template-columns:1fr;}
+    .event{grid-template-columns:1fr;gap:6px;}
+    .event .time{color:var(--gold);}
+    table{font-size:12.5px;}
+    th,td{padding:8px}
+  }
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>Josh's Bachelor <span>Weekend</span></h1>
+  <div class="dates">CHICAGO · SEPT 12–14, 2026 · 6 GROOMSMEN</div>
+</div>
+
+<div class="wrap">
+
+  <div class="logistics">
+    <div class="cell">
+      <div class="label">Stay</div>
+      <div class="val">Level Chicago — River North</div>
+      <div class="sub"><a href="https://www.google.com/maps/search/?api=1&query=Level+Chicago+River+North+369+W+Grand+Ave+Chicago+IL">369 W Grand Ave</a> · 2BR + sofa bed · $183.00/person</div>
+    </div>
+    <div class="cell">
+      <div class="label">Travel</div>
+      <div class="val">Amtrak — covered by Mr. Cunningham</div>
+      <div class="sub">Out: Sat 9:35a → 2:02p · Back: Mon 5:50p → 12:10a</div>
+    </div>
+  </div>
+
+  <!-- =============== SATURDAY =============== -->
+  <div class="day">
+    <div class="day-head">
+      <span class="day-num">DAY 01</span>
+      <h2>Saturday, Sept 12</h2>
+    </div>
+    <div class="day-sub">ARRIVAL → TOURISTY CHICAGO DAY → DINNER → CASINO</div>
+    <div id="map-sat" class="day-map"></div>
+    <p class="map-caption">Approximate — for exact directions, use the address links in each stop below.</p>
+
+    <div class="event">
+      <div class="time">9:35A</div>
+      <div>
+        <div class="title">Depart Detroit on Amtrak — Train 353</div>
+        <div class="desc">Confirmed from your eTicket, Reservation #99BE96. 5 coach seats.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">2:02P</div>
+      <div>
+        <div class="title">Arrive Chicago Union Station</div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Chicago+Union+Station+225+S+Canal+St+Chicago+IL">225 S Canal St</a></div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">2:30P</div>
+      <div>
+        <div class="title">Check in — Level Chicago, drop bags</div>
+        <div class="desc">369 W Grand Ave. Full 2BR apartment, sofa bed in the living room.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">3:00P</div>
+      <div>
+        <div class="title">Mythical Kicks — River North</div>
+        <div class="desc">A well-regarded <a href="https://www.google.com/maps/search/?api=1&query=Mythical+Kicks+Chicago+IL">sneaker boutique</a> a few blocks from the apartment — hits Josh's "cool shit" bonus interest right at the start of the touristy stretch.</div>
+        <div class="meta"><span class="pill">River North</span><span class="pill">~5 min walk from Level</span></div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">3:45P</div>
+      <div>
+        <div class="title">Chicago dog — Portillo's <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· MOVED</span></div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Portillo%27s+100+W+Ontario+St+Chicago+IL">100 W Ontario St, River North</a>. The classic: Vienna Beef dog, poppy seed bun, all the way. Quick counter service — treat it as a snack before the full touristy loop, not a sit-down meal.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">4:15P</div>
+      <div>
+        <div class="title">Touristy Chicago loop</div>
+        <div class="desc">The <a href="https://www.google.com/maps/search/?api=1&query=Cloud+Gate+Millennium+Park+Chicago+IL">Bean (Cloud Gate) at Millennium Park</a>, then a stroll down the <a href="https://www.google.com/maps/search/?api=1&query=Chicago+Riverwalk">Riverwalk</a> east toward the lake, finishing at <a href="https://www.google.com/maps/search/?api=1&query=Navy+Pier+600+E+Grand+Ave+Chicago+IL">Navy Pier</a>. All walkable and connected, roughly 1.5–2 hours end to end depending on pace — ride the Centennial Wheel at Navy Pier if the group's up for it.</div>
+        <div class="meta"><span class="pill">Millennium Park → Riverwalk → Navy Pier</span></div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">6:15P</div>
+      <div>
+        <div class="title">Head back to the apartment — freshen up</div>
+        <div class="desc">Navy Pier to Level is about a 10–15 min rideshare.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">7:30P</div>
+      <div>
+        <div class="title">Dinner — Ciccio Mio</div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Ciccio+Mio+226+W+Kinzie+St+Chicago+IL">226 W Kinzie St, River North</a> — about a 6-minute walk from the apartment. Intimate Italian, in-house pastas, chicken parm, well regarded across the board. Pushed back 30 min from the original 7:00 to give the touristy loop room to breathe — worth requesting 7:30 specifically when the Resy window opens.</div>
+        <div class="meta">
+          <span class="pill book">(312) 796-3316</span>
+          <span class="pill">Party of 6</span>
+          <span class="pill turf">Book Aug 22, 9:00 AM sharp on Resy</span>
+        </div>
+        <div class="note"><b>Deadline:</b> reservations release exactly 21 days out at 9:00 AM Central. Miss that window and it's essentially sold out for prime time. Calendar invite is set.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">9:30P</div>
+      <div>
+        <div class="title">Bally's Chicago Casino — Medinah Temple</div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Bally%27s+Chicago+600+N+Wabash+Ave+Chicago+IL">600 N Wabash Ave</a>. Slots, ~50 table games, open 24/7, no cover.</div>
+        <div class="meta"><span class="pill book">(888) 822-2559</span><span class="pill">~12 min walk from Level</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== SUNDAY =============== -->
+  <div class="day">
+    <div class="day-head">
+      <span class="day-num">DAY 02</span>
+      <h2>Sunday, Sept 13</h2>
+    </div>
+    <div class="day-sub">CLASSICS → RECOVER → FIRE VS. REVOLUTION → BAR CRAWL</div>
+    <div id="map-sun" class="day-map"></div>
+    <p class="map-caption">Approximate — for exact directions, use the address links in each stop below.</p>
+
+    <div class="event">
+      <div class="time">11:00A</div>
+      <div>
+        <div class="title">Coffee, easy morning</div>
+        <div class="desc">No golf today — Sunday's built around the game, so the morning is unhurried. Hot dog's already checked off from yesterday, so it's just the pizza today.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">12:30P</div>
+      <div>
+        <div class="title">Deep dish — Lou Malnati's</div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Lou+Malnati%27s+439+N+Wells+St+Chicago+IL">439 N Wells St, River North</a>. Call or order online ~30 min ahead — deep dish takes 30–45 min to bake, so a head start means it's ready when you sit down.</div>
+        <div class="meta"><span class="pill book">(312) 828-9800</span></div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">1:45P</div>
+      <div>
+        <div class="title">Back to the apartment — rest, digest</div>
+        <div class="desc">Let the deep dish settle before pregame starts.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">2:30P</div>
+      <div>
+        <div class="title">Pregame — TBD</div>
+        <div class="desc">Open slot — wherever you land on it. Leave enough time to get to Soldier Field before gates open at 3:30.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">3:30P</div>
+      <div>
+        <div class="title">Gates open — Soldier Field</div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Soldier+Field+1410+S+Museum+Campus+Dr+Chicago+IL">1410 S Museum Campus Dr</a></div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">4:30P</div>
+      <div>
+        <div class="title">Chicago Fire FC vs. New England Revolution — Soldier Field</div>
+        <div class="desc">1410 S Museum Campus Dr. Kickoff confirmed for 4:30 PM CT.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">7:00P</div>
+      <div>
+        <div class="title">Dinner — Gilt Bar <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· NEW</span></div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Gilt+Bar+230+W+Kinzie+St+Chicago+IL">230 W Kinzie St</a> — literally across the street from Ciccio Mio, same Hogsalt restaurant group. Craft cocktails, sharable American plates, steak tartare, ricotta gnocchi. Louder and looser than Saturday's spot — good energy for a post-game crowd.</div>
+        <div class="meta">
+          <span class="pill book">(312) 464-9544</span>
+          <span class="pill">Max party of 8</span>
+          <span class="pill turf">Book Aug 23, 9:00 AM sharp on Resy</span>
+        </div>
+        <div class="note"><b>Same deal as Ciccio Mio:</b> reservations release exactly 21 days out at 9:00 AM on Resy — for Sept 13 that's <b>Sunday, Aug 23 at 9:00 AM</b>. If you want to keep the night going after dinner, ask about The Library, their basement speakeasy bar downstairs (Thu–Sat, 6 PM–close) — full menu, cocktails, and it flows straight into your bar crawl without needing to move blocks.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">9:00P</div>
+      <div>
+        <div class="title">Bar crawl — River North</div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Machine+Cocktail+Bar+Chicago+IL">Machine Cocktail Bar</a> → <a href="https://www.google.com/maps/search/?api=1&query=HQ+Beercade+Chicago+IL">HQ Beer Cade</a> → <a href="https://www.google.com/maps/search/?api=1&query=Dearly+Beloved+Chicago+IL">Dearly Beloved</a>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== MONDAY =============== -->
+  <div class="day">
+    <div class="day-head">
+      <span class="day-num">DAY 03</span>
+      <h2>Monday, Sept 14</h2>
+    </div>
+    <div class="day-sub">FULL 18 AT HARBORSIDE → TRADING CARDS → DEPART</div>
+    <div id="map-mon" class="day-map"></div>
+    <p class="map-caption">Approximate — for exact directions, use the address links in each stop below.</p>
+
+    <div class="event">
+      <div class="time">7:00A</div>
+      <div>
+        <div class="title">Up, coffee, bags staged</div>
+        <div class="desc">Level confirmed you can leave bags with them after checkout, so no need to rush back before golf — check out on the way out the door and grab everything after the round.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">7:30A</div>
+      <div>
+        <div class="title">Drive to Harborside International Golf Center</div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Harborside+International+Golf+Center+11001+S+Doty+Ave+E+Chicago+IL">11001 S Doty Ave E</a> — about 25–30 min from River North. Course opens at 6 AM, so an early tee time is realistic.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">8:00A</div>
+      <div>
+        <div class="title">Golf — Full 18, Harborside (Port or Starboard course) <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· NEW</span></div>
+        <div class="desc">Both courses run 7,100+ championship yards with skyline views — this is the real round of the weekend. Budget the full 4.5–5 hours.</div>
+        <div class="meta">
+          <span class="pill book">(312) 782-7837</span>
+          <span class="pill">Dynamic pricing — book as close to travel dates as reasonable</span>
+        </div>
+        <div class="note"><b>Worth a call, not just an online booking:</b> you're aiming to get all 6 off together at 8:00 AM as one group rather than splitting into two tee times — worth confirming directly with the course that they can accommodate a single 6-person group, since some courses cap groups at 4-5.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">1:00P</div>
+      <div>
+        <div class="title">Quick bite at the clubhouse</div>
+        <div class="desc">Grab food or a beer at Harborside before heading back — easier than trying to fit lunch in downtown later.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">1:30P</div>
+      <div><div class="title">Drive back to River North</div></div>
+    </div>
+
+    <div class="event">
+      <div class="time">2:15P</div>
+      <div><div class="title">Back at Level — shower, change, grab bags from storage</div></div>
+    </div>
+
+    <div class="event">
+      <div class="time">3:00P</div>
+      <div>
+        <div class="title">Windy City Sports Cards <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· MOVED</span></div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=2045+W+Grand+Ave+Ste+B+Chicago+IL">2045 W Grand Ave, Ste B</a> — same street as the apartment, easy walk or a 5-min drive. Chicago-team-focused inventory: Bears, Bulls, Cubs, Sox, Blackhawks, plus other major sports. Moved here from Sunday — small hobby shops like this typically run standard weekday hours, so Monday afternoon is a safer bet than a Sunday morning.</div>
+        <div class="meta">
+          <span class="pill book">(847) 220-8796 — still worth a quick call to confirm</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">4:30P</div>
+      <div><div class="title">Head to Union Station</div><div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Chicago+Union+Station+225+S+Canal+St+Chicago+IL">225 S Canal St</a>. Build in real buffer here — this is the one hard deadline of the trip for 4 of you.</div></div>
+    </div>
+
+    <div class="event">
+      <div class="time">5:50P</div>
+      <div>
+        <div class="title">Depart Chicago on Amtrak — Train 354</div>
+        <div class="desc">4 coach seats, confirmed on your eTicket. Arrives Detroit ~12:10 AM.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="decisions">
+    <div class="decisions-head"><h2>Open Decisions — Need Your Call</h2></div>
+    <ol>
+      <li><b>Two Resy mornings in a row: Aug 22 and Aug 23, both 9:00 AM Central.</b> Ciccio Mio (Sat dinner) releases Aug 22, Gilt Bar (Sun dinner) releases Aug 23 — calendar invites are set with reminders. Decide who's on point for each.</li>
+      <li><b>Harborside tee time for 6</b> — the 21-day window opens Aug 24 (calendar invite set). Call rather than book online, and ask specifically for one group tee time for all 6, given the plan to play together.</li>
+      <li><b>Sunday pregame spot</b> — open again, wherever you land on it.</li>
+      <li><b>Any more restaurants or spots you want checked</b> — send them over and I'll slot them in and re-check the timing around them.</li>
+    </ol>
+  </div>
+
+  <div style="margin-top:56px;padding-top:20px;border-top:1px solid var(--line);">
+    <div style="font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:13px;font-weight:600;color:var(--gold);">Revision Notes</div>
+  </div>
+
+  <div class="scorecard">
+    <div class="scorecard-head">
+      <h2>What I Changed &amp; Why</h2>
+      <span class="tag">6 EDITS</span>
+    </div>
+    <div class="fix-list">
+      <div class="fix">
+        <div class="mark">01</div>
+        <div class="body"><b>Sunday golf swapped to Sydney R. Marovitz (9 holes), not Jackson Park (18).</b> <span class="was">Jackson Park is a full 18-hole round on the South Side — realistically 4.5–5 hrs plus a 30-min drive each way.</span> With kickoff locked at 4:30 PM, that leaves zero room for lunch, a shower, or getting to Soldier Field. Marovitz is a 9-hole lakefront course 15 minutes from the apartment — a 3-hour round that gets everyone home with time to spare.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">02</div>
+        <div class="body"><b>Cut the 3–4 PM Navy Pier/shopping block on Sunday.</b> <span class="was">It doesn't work geographically — Navy Pier is in the opposite direction from Soldier Field, with the golf round running until ~1 PM.</span> Replaced it with recovery time and a pregame near the stadium instead.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">03</div>
+        <div class="body"><b>Confirmed kickoff is 4:30 PM CT (gates 3:30 PM), not a placeholder.</b> Chicago Fire FC moved this match an hour earlier back in July. The draft's 4:30 PM was actually right — good instinct, just wanted it verified since a lot hinges on it.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">04</div>
+        <div class="body"><b>Cut the Monday 18-hole round at Harborside.</b> <span class="was">Harborside is a 7,100+ yard championship course — a legit 4.5–5 hour round — plus it's 25+ min from downtown.</span> With an 11 AM-ish checkout and a 5:50 PM train, that's the whole day gone before packing, food, or a beach stop. Two rounds of golf in one weekend also isn't necessary — you already get golf in on Sunday.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">05</div>
+        <div class="body"><b>Cut the Great Escape Room from Monday.</b> <span class="was">Its earliest Monday slot is 4:45 PM — that's after your train departs.</span> It just doesn't fit this trip; drop it or save it for a future trip.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">06</div>
+        <div class="body"><b>Added a 30-minute stop at Mythical Kicks Saturday afternoon.</b> It's a sneaker boutique a few blocks from the apartment — covers Josh's "cool shit" bonus interest without adding any real travel time or risking the rest of the day.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scorecard">
+    <div class="scorecard-head">
+      <h2>Round 2 — Your Latest Notes</h2>
+      <span class="tag">4 EDITS</span>
+    </div>
+    <div class="fix-list">
+      <div class="fix">
+        <div class="mark">07</div>
+        <div class="body"><b>Added a trading card stop — Windy City Sports Cards.</b> It's on Grand Ave, the same street as the apartment, so it costs almost no travel time. Chicago-focused inventory (Bears/Bulls/Cubs/Sox/Hawks), which fits the theme of the weekend. <i>(Now on Monday — see Round 3 below.)</i></div>
+      </div>
+      <div class="fix">
+        <div class="mark">08</div>
+        <div class="body"><b>Moved the full 18-hole round to Monday, not Sunday.</b> <span class="was">Sunday's hard stop is the 4:30 PM kickoff — there's no way to fit a 4.5–5 hour championship round in before that.</span> Monday has the open runway: tee off early (Harborside opens at 6 AM), finish by early afternoon, and there's still slack before the 5:50 PM train. Sunday now runs the classics instead — no golf, no rush.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">09</div>
+        <div class="body"><b>Locked in Ciccio Mio for Saturday dinner — with a real deadline attached.</b> It's an excellent call: intimate, well-reviewed Italian a 6-minute walk from the apartment. One catch worth knowing — they release tables exactly 21 days out at 9:00 AM sharp on Resy, and cap parties at 6 (your exact group size, no slack for a plus-one). For your Sept 12 date, that means <b>the booking window opens Saturday, Aug 22 at 9:00 AM</b>. Whoever's on point for this should have Resy open and ready right at 9.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">10</div>
+        <div class="body"><b>Added Chicago classics — a dog at Portillo's, deep dish at Lou Malnati's — Sunday late morning.</b> Both are River North locations, a few minutes apart, so they slot in right before the pregame stretch. Heads up: that's a lot of food ahead of a sit-down dinner post-game — worth going lighter at dinner, or treating it as grazing rather than two full meals.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scorecard">
+    <div class="scorecard-head">
+      <h2>Round 3 — Your Latest Notes</h2>
+      <span class="tag">3 EDITS</span>
+    </div>
+    <div class="fix-list">
+      <div class="fix">
+        <div class="mark">11</div>
+        <div class="body"><b>Train is covered by Mr. Cunningham (Josh's dad) — noted on the logistics card up top.</b> One less thing for anyone to Venmo.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">12</div>
+        <div class="body"><b>Added Gilt Bar as a second dinner option — set for Sunday.</b> Great pick, and it's practically next door to Ciccio Mio (230 vs. 226 W Kinzie — same block, same restaurant group). Same booking mechanics too: 21 days out, 9:00 AM sharp on Resy. For Sunday Sept 13, that's <b>Saturday, Aug 23 at 9:00 AM</b> — one day after the Ciccio Mio window opens, so it's two consecutive mornings of being ready at 9 AM.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">13</div>
+        <div class="body"><b>Moved the trading card stop off Sunday, onto Monday afternoon.</b> <span class="was">Windy City Sports Cards' listed Sunday hours looked unreliable across sources.</span> Small hobby shops like this tend to keep standard weekday hours, so Monday — inside the free-time buffer after golf, once you're already showered and checked out — is the safer slot. Same shop, same address, just a more predictable day.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scorecard">
+    <div class="scorecard-head">
+      <h2>Round 4 — Your Latest Notes</h2>
+      <span class="tag">6 EDITS</span>
+    </div>
+    <div class="fix-list">
+      <div class="fix">
+        <div class="mark">14</div>
+        <div class="body"><b>Party size confirmed at 6 for the whole trip.</b> Already reflected everywhere it matters — Ciccio Mio, Gilt Bar, and Harborside are all being booked for 6.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">15</div>
+        <div class="body"><b>Split the hot dog and deep dish onto separate days.</b> Hot dog moved to Saturday afternoon; deep dish stays on Sunday. No more double-carb-load in one sitting.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">16</div>
+        <div class="body"><b>Dropped Puttery, added a touristy Chicago day in its place.</b> Saturday afternoon is now Mythical Kicks → Portillo's → The Bean at Millennium Park → Riverwalk → Navy Pier, before circling back for dinner. Pushed Ciccio Mio to 7:30 PM (from 7:00) to give the loop room to breathe — worth requesting that specific time once the Resy window opens.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">17</div>
+        <div class="body"><b>Built three calendar invites with reminders (15 min + 1 day before), directly on your calendar.</b> Ciccio Mio (Aug 22, 9 AM CT), Gilt Bar (Aug 23, 9 AM CT), and Harborside's 21-day golf window (Aug 24). All three show correctly converted to your local time.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">18</div>
+        <div class="body"><b>Pulled your actual Amtrak eTicket.</b> Saturday's 9:35 AM departure (Train 353) matches what was already in the plan. Return is confirmed for Monday at 5:50 PM (Train 354).</div>
+      </div>
+      <div class="fix">
+        <div class="mark">19</div>
+        <div class="body"><b>Also flagged: only 5 passengers are on the Amtrak reservation, not 6.</b> Alan, Austin, Josh, Angelo, and Jake are named — worth confirming how the 6th person is traveling.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scorecard">
+    <div class="scorecard-head">
+      <h2>Round 6 — Your Latest Notes</h2>
+      <span class="tag">4 EDITS</span>
+    </div>
+    <div class="fix-list">
+      <div class="fix">
+        <div class="mark">20</div>
+        <div class="body"><b>Removed the flagged 2:35 PM train block from Monday and the related Open Decision.</b> The trade-off (early train vs. full round) is still real, but no longer called out with a dedicated red-flagged block — you've got the context, it's just not front and center anymore.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">21</div>
+        <div class="body"><b>Dropped Reggie's Rock Club as the Sunday pregame.</b> Back to open — wherever you land on it, send it over and I'll slot it in.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">22</div>
+        <div class="body"><b>Removed the last mention of Puttery</b> from the Saturday touristy-loop title.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">23</div>
+        <div class="body"><b>Standardized the map links.</b> Every venue now links once, on its first mention — the pattern is consistent throughout instead of alternating between heading links and body-text links.</div>
+      </div>
+    </div>
+  </div>
+  <footer>MADE FOR JOSH'S BACHELOR WEEKEND · GO FIRE</footer>
+</div>
+
+<script>
+function buildMap(id, stops){
+  var el = document.getElementById(id);
+  if(!el) return;
+  var map = L.map(id, {scrollWheelZoom:false}).setView([stops[0].lat, stops[0].lng], 12);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  var latlngs = [];
+  stops.forEach(function(s, i){
+    var icon = L.divIcon({
+      className: '',
+      html: '<div class="pin-num">' + (i + 1) + '</div>',
+      iconSize: [24, 24],
+      iconAnchor: [12, 12]
+    });
+    L.marker([s.lat, s.lng], {icon: icon}).addTo(map)
+      .bindTooltip((i + 1) + '. ' + s.name, {direction: 'top', offset: [0, -12]});
+    latlngs.push([s.lat, s.lng]);
+  });
+
+  L.polyline(latlngs, {color: '#E3A73A', weight: 2, opacity: 0.55, dashArray: '4,7'}).addTo(map);
+  map.fitBounds(L.latLngBounds(latlngs), {padding: [28, 28]});
+}
+
+window.addEventListener('load', function(){
+  buildMap('map-sat', [
+    {name: 'Level Chicago', lat: 41.8917, lng: -87.6355},
+    {name: 'Mythical Kicks', lat: 41.8925, lng: -87.6370},
+    {name: "Portillo's", lat: 41.8928, lng: -87.6296},
+    {name: 'Millennium Park / The Bean', lat: 41.8827, lng: -87.6233},
+    {name: 'Riverwalk', lat: 41.8875, lng: -87.6251},
+    {name: 'Navy Pier', lat: 41.8917, lng: -87.6086},
+    {name: 'Ciccio Mio', lat: 41.8886, lng: -87.6343},
+    {name: "Bally's Casino", lat: 41.8917, lng: -87.6280}
+  ]);
+  buildMap('map-sun', [
+    {name: 'Level Chicago', lat: 41.8917, lng: -87.6355},
+    {name: "Lou Malnati's", lat: 41.8908, lng: -87.6342},
+    {name: 'Soldier Field', lat: 41.8623, lng: -87.6167},
+    {name: 'Gilt Bar', lat: 41.8886, lng: -87.6344},
+    {name: 'Machine Cocktail Bar', lat: 41.8925, lng: -87.6350},
+    {name: 'HQ Beercade', lat: 41.8975, lng: -87.6345},
+    {name: 'Dearly Beloved', lat: 41.8930, lng: -87.6355}
+  ]);
+  buildMap('map-mon', [
+    {name: 'Level Chicago', lat: 41.8917, lng: -87.6355},
+    {name: 'Harborside Golf', lat: 41.6935, lng: -87.5309},
+    {name: 'Windy City Sports Cards', lat: 41.8917, lng: -87.6797},
+    {name: 'Union Station', lat: 41.8789, lng: -87.6394}
+  ]);
+});
+</script>
+</body>
+</html>
