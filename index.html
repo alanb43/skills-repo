@@ -36,7 +36,6 @@
 
   h1,h2,h3,.eyebrow,.time,.label{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.04em;}
 
-  /* ---------- HERO ---------- */
   .hero{
     padding:64px 24px 48px;
     background:
@@ -45,15 +44,6 @@
     border-bottom:1px solid var(--line);
     text-align:center;
   }
-  .hero .eyebrow{
-    color:var(--gold);
-    font-size:13px;
-    font-weight:600;
-    letter-spacing:.18em;
-    margin-bottom:18px;
-  }
-  .hero .eyebrow::before,.hero .eyebrow::after{content:"— ";}
-  .hero .eyebrow::after{content:" —";}
   .hero h1{
     font-size:56px;
     font-weight:700;
@@ -68,24 +58,6 @@
     font-size:16px;
     letter-spacing:.05em;
   }
-  .roster{
-    margin-top:28px;
-    display:inline-flex;
-    gap:8px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-  .chip{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px;
-    color:var(--paper-dim);
-    border:1px solid var(--line);
-    border-radius:2px;
-    padding:5px 10px;
-    background:var(--navy-panel);
-  }
-
-  /* ---------- LOGISTICS STRIP ---------- */
   .logistics{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -99,8 +71,6 @@
   .logistics .val{font-size:15px;color:var(--paper);}
   .logistics .val a{color:var(--paper);}
   .logistics .sub{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--paper-dim);margin-top:6px;}
-
-  /* ---------- SCORECARD / WHAT CHANGED ---------- */
   .scorecard{
     margin:48px 0;
     background:var(--navy-panel);
@@ -134,8 +104,6 @@
   .fix .body b{color:var(--paper);font-weight:600;}
   .fix .body{font-size:15px;color:var(--paper-dim);}
   .fix .body .was{color:var(--muted);font-style:italic;}
-
-  /* ---------- DAY BLOCKS ---------- */
   .day{margin:56px 0 0;}
   .day-head{
     display:flex;
@@ -154,7 +122,6 @@
   }
   .day-head h2{font-size:30px;color:var(--paper);margin:0;font-weight:600;}
   .day-sub{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted);margin:8px 0 20px;letter-spacing:.03em;}
-
   .event{
     display:grid;
     grid-template-columns:88px 1fr;
@@ -207,20 +174,6 @@
     padding-left:10px;
   }
   .note b{color:var(--paper-dim);}
-
-  .choice-box{
-    background:var(--navy-panel);
-    border:1px dashed var(--line);
-    padding:16px 18px;
-    margin-top:8px;
-    font-size:14px;
-    color:var(--paper-dim);
-  }
-  .choice-box .ch-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.1em;margin-bottom:8px;display:block;}
-  .choice-box ul{margin:0;padding-left:18px;}
-  .choice-box li{margin-bottom:4px;}
-
-  /* ---------- OPEN DECISIONS ---------- */
   .decisions{
     margin:56px 0;
     background:var(--navy-panel);
@@ -232,31 +185,6 @@
   .decisions ol{margin:0;padding:18px 22px 18px 40px;}
   .decisions li{margin-bottom:14px;font-size:15px;color:var(--paper-dim);}
   .decisions li b{color:var(--paper);}
-
-  /* ---------- CONTACT SHEET ---------- */
-  .contacts{margin:56px 0;}
-  .contacts h2{font-size:22px;color:var(--paper);margin:0 0 4px;font-weight:600;}
-  .contacts .day-sub{margin-bottom:20px;}
-  table{width:100%;border-collapse:collapse;font-size:14px;}
-  th{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--gold);
-    text-align:left;
-    padding:10px 14px;
-    border-bottom:1px solid var(--gold-dim);
-  }
-  td{
-    padding:12px 14px;
-    border-bottom:1px solid var(--line);
-    color:var(--paper-dim);
-    vertical-align:top;
-  }
-  td.name{color:var(--paper);font-weight:600;font-family:'Oswald',sans-serif;text-transform:none;letter-spacing:0;font-size:14.5px;}
-  td.mono{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--gold);white-space:nowrap;}
-
   footer{
     margin-top:70px;
     padding-top:24px;
@@ -267,8 +195,6 @@
     font-size:12px;
     letter-spacing:.05em;
   }
-
-  /* ---------- DAY MAPS ---------- */
   .day-map{
     height:300px;
     border-radius:2px;
@@ -300,7 +226,6 @@
     box-shadow:none !important;
   }
   .leaflet-tooltip-top:before{border-top-color:var(--line) !important;}
-
   @media(max-width:600px){
     .hero h1{font-size:38px;}
     .logistics{grid-template-columns:1fr;}
@@ -332,13 +257,12 @@
     </div>
   </div>
 
-  <!-- =============== SATURDAY =============== -->
   <div class="day">
     <div class="day-head">
       <span class="day-num">DAY 01</span>
       <h2>Saturday, Sept 12</h2>
     </div>
-    <div class="day-sub">ARRIVAL → TOURISTY CHICAGO DAY → DINNER → CASINO</div>
+    <div class="day-sub">ARRIVAL → TIKI CRUISE → DINNER → CASINO</div>
     <div id="map-sat" class="day-map"></div>
     <p class="map-caption">Approximate — for exact directions, use the address links in each stop below.</p>
 
@@ -379,38 +303,59 @@
       <div class="time">3:45P</div>
       <div>
         <div class="title">Chicago dog — Portillo's <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· MOVED</span></div>
-        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Portillo%27s+100+W+Ontario+St+Chicago+IL">100 W Ontario St, River North</a>. The classic: Vienna Beef dog, poppy seed bun, all the way. Quick counter service — treat it as a snack before the full touristy loop, not a sit-down meal.</div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Portillo%27s+100+W+Ontario+St+Chicago+IL">100 W Ontario St, River North</a>. The classic: Vienna Beef dog, poppy seed bun, all the way. Quick counter service — keep it under 20 min, the afternoon's on a schedule now.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">4:05P</div>
+      <div>
+        <div class="title">Quick stop — The Bean</div>
+        <div class="desc">A fast photo-op detour at <a href="https://www.google.com/maps/search/?api=1&query=Cloud+Gate+Millennium+Park+Chicago+IL">Cloud Gate in Millennium Park</a> — 10 minutes, tops. The boarding time below is a hard stop, so don't linger.</div>
       </div>
     </div>
 
     <div class="event">
       <div class="time">4:15P</div>
       <div>
-        <div class="title">Touristy Chicago loop</div>
-        <div class="desc">The <a href="https://www.google.com/maps/search/?api=1&query=Cloud+Gate+Millennium+Park+Chicago+IL">Bean (Cloud Gate) at Millennium Park</a>, then a stroll down the <a href="https://www.google.com/maps/search/?api=1&query=Chicago+Riverwalk">Riverwalk</a> east toward the lake, finishing at <a href="https://www.google.com/maps/search/?api=1&query=Navy+Pier+600+E+Grand+Ave+Chicago+IL">Navy Pier</a>. All walkable and connected, roughly 1.5–2 hours end to end depending on pace — ride the Centennial Wheel at Navy Pier if the group's up for it.</div>
-        <div class="meta"><span class="pill">Millennium Park → Riverwalk → Navy Pier</span></div>
+        <div class="title">Walk to the dock</div>
+        <div class="desc">From Millennium Park to <a href="https://www.google.com/maps/search/?api=1&query=355+E+Riverwalk+South+Chicago+IL+60601">355 E Riverwalk South</a> is about a 10–15 min walk along the Riverwalk. Boarding requires arrival 30 min ahead of departure — no buffer left after this.</div>
       </div>
     </div>
 
     <div class="event">
-      <div class="time">6:15P</div>
+      <div class="time">4:30P</div>
+      <div>
+        <div class="title">Chicago River Tiki Bar Cruise <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· BOOKED</span></div>
+        <div class="desc">Booked by Austin — Island Party Boat, via GetYourGuide. Cruises the Chicago River / Lake Michigan, 5:00–6:15 PM, 6 adults. This replaces the loose Riverwalk-to-Navy-Pier plan entirely — you're on the water instead of walking past it.</div>
+        <div class="meta">
+          <span class="pill book">(312) 600-8454</span>
+          <span class="pill">6 adults</span>
+          <span class="pill turf">Booking #374750363 / GYG2Q9BN2M85</span>
+        </div>
+        <div class="note"><b>Board by 4:30 PM sharp</b> — meet at <a href="https://www.google.com/maps/search/?api=1&query=355+E+Riverwalk+South+Chicago+IL+60601">355 E Riverwalk South</a>. No outside drinks or bags with anything sketchy — everything's subject to search. Wear shoes you don't mind getting a little wet.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">6:30P</div>
       <div>
         <div class="title">Head back to the apartment — freshen up</div>
-        <div class="desc">Navy Pier to Level is about a 10–15 min rideshare.</div>
+        <div class="desc">The dock is about a 10-min rideshare from Level.</div>
       </div>
     </div>
 
     <div class="event">
       <div class="time">7:30P</div>
       <div>
-        <div class="title">Dinner — Ciccio Mio</div>
-        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Ciccio+Mio+226+W+Kinzie+St+Chicago+IL">226 W Kinzie St, River North</a> — about a 6-minute walk from the apartment. Intimate Italian, in-house pastas, chicken parm, well regarded across the board. Pushed back 30 min from the original 7:00 to give the touristy loop room to breathe — worth requesting 7:30 specifically when the Resy window opens.</div>
+        <div class="title">Dinner — RPM Italian <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· BOOKED</span></div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=RPM+Italian+52+W+Illinois+St+Chicago+IL">52 W Illinois St, River North</a>. Table for 6, confirmed via OpenTable.</div>
         <div class="meta">
-          <span class="pill book">(312) 796-3316</span>
+          <span class="pill book">(312) 222-1888</span>
           <span class="pill">Party of 6</span>
-          <span class="pill turf">Book Aug 22, 9:00 AM sharp on Resy</span>
+          <span class="pill turf">Confirmation #2110644285</span>
         </div>
-        <div class="note"><b>Deadline:</b> reservations release exactly 21 days out at 9:00 AM Central. Miss that window and it's essentially sold out for prime time. Calendar invite is set.</div>
+        <div class="note"><b>Booked:</b> confirmed for 7:30 PM under Alan Bergsneider. This replaced the earlier Ciccio Mio plan — RPM Italian is where the reservation actually landed.</div>
       </div>
     </div>
 
@@ -424,7 +369,6 @@
     </div>
   </div>
 
-  <!-- =============== SUNDAY =============== -->
   <div class="day">
     <div class="day-head">
       <span class="day-num">DAY 02</span>
@@ -484,21 +428,20 @@
     </div>
 
     <div class="event">
-      <div class="time">7:00P</div>
+      <div class="time">8:00P</div>
       <div>
-        <div class="title">Dinner — Gilt Bar <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· NEW</span></div>
-        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Gilt+Bar+230+W+Kinzie+St+Chicago+IL">230 W Kinzie St</a> — literally across the street from Ciccio Mio, same Hogsalt restaurant group. Craft cocktails, sharable American plates, steak tartare, ricotta gnocchi. Louder and looser than Saturday's spot — good energy for a post-game crowd.</div>
+        <div class="title">Dinner — Sophia Steak Chicago <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· BOOKED</span></div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Sophia+Steak+Chicago+748+N+State+St+Chicago+IL">748 N State St</a>. Table for 6, confirmed via Resy — Ballyhoo Hospitality steakhouse.</div>
         <div class="meta">
-          <span class="pill book">(312) 464-9544</span>
-          <span class="pill">Max party of 8</span>
-          <span class="pill turf">Book Aug 23, 9:00 AM sharp on Resy</span>
+          <span class="pill book">(773) 569-3522</span>
+          <span class="pill">6 guests</span>
         </div>
-        <div class="note"><b>Same deal as Ciccio Mio:</b> reservations release exactly 21 days out at 9:00 AM on Resy — for Sept 13 that's <b>Sunday, Aug 23 at 9:00 AM</b>. If you want to keep the night going after dinner, ask about The Library, their basement speakeasy bar downstairs (Thu–Sat, 6 PM–close) — full menu, cocktails, and it flows straight into your bar crawl without needing to move blocks.</div>
+        <div class="note"><b>Booked:</b> confirmed for 8:00 PM, first available. This replaced the earlier Gilt Bar plan — Sophia Steak is where the reservation actually landed. Pushed later than the original 7:00 PM slot, so it's a bit more forgiving if the post-game crowd runs late leaving Soldier Field.</div>
       </div>
     </div>
 
     <div class="event">
-      <div class="time">9:00P</div>
+      <div class="time">10:00P</div>
       <div>
         <div class="title">Bar crawl — River North</div>
         <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Machine+Cocktail+Bar+Chicago+IL">Machine Cocktail Bar</a> → <a href="https://www.google.com/maps/search/?api=1&query=HQ+Beercade+Chicago+IL">HQ Beer Cade</a> → <a href="https://www.google.com/maps/search/?api=1&query=Dearly+Beloved+Chicago+IL">Dearly Beloved</a>.</div>
@@ -506,7 +449,6 @@
     </div>
   </div>
 
-  <!-- =============== MONDAY =============== -->
   <div class="day">
     <div class="day-head">
       <span class="day-num">DAY 03</span>
@@ -535,13 +477,14 @@
     <div class="event">
       <div class="time">8:00A</div>
       <div>
-        <div class="title">Golf — Full 18, Harborside (Port or Starboard course) <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· NEW</span></div>
-        <div class="desc">Both courses run 7,100+ championship yards with skyline views — this is the real round of the weekend. Budget the full 4.5–5 hours.</div>
+        <div class="title">Golf — Full 18, Harborside (Port Course) <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· BOOKED</span></div>
+        <div class="desc">7,100+ championship yards with skyline views — the real round of the weekend. Budget the full 4.5–5 hours. Confirmed as a single reservation for all 6 — no split tee times.</div>
         <div class="meta">
           <span class="pill book">(312) 782-7837</span>
-          <span class="pill">Dynamic pricing — book as close to travel dates as reasonable</span>
+          <span class="pill">6 players, one tee time</span>
+          <span class="pill turf">Confirmation #667993496</span>
         </div>
-        <div class="note"><b>Worth a call, not just an online booking:</b> you're aiming to get all 6 off together at 8:00 AM as one group rather than splitting into two tee times — worth confirming directly with the course that they can accommodate a single 6-person group, since some courses cap groups at 4-5.</div>
+        <div class="note"><b>Booked:</b> confirmed for 8:00 AM under Alan Bergsneider. Greens fee doesn't include the 9% Chicago amusement tax, and it's due on arrival — entering a card online only holds the reservation. Collared shirts required, no denim/t-shirts/tank tops, Bermuda-length shorts, soft spikes only.</div>
       </div>
     </div>
 
@@ -591,8 +534,6 @@
   <div class="decisions">
     <div class="decisions-head"><h2>Open Decisions — Need Your Call</h2></div>
     <ol>
-      <li><b>Two Resy mornings in a row: Aug 22 and Aug 23, both 9:00 AM Central.</b> Ciccio Mio (Sat dinner) releases Aug 22, Gilt Bar (Sun dinner) releases Aug 23 — calendar invites are set with reminders. Decide who's on point for each.</li>
-      <li><b>Harborside tee time for 6</b> — the 21-day window opens Aug 24 (calendar invite set). Call rather than book online, and ask specifically for one group tee time for all 6, given the plan to play together.</li>
       <li><b>Sunday pregame spot</b> — open again, wherever you land on it.</li>
       <li><b>Any more restaurants or spots you want checked</b> — send them over and I'll slot them in and re-check the timing around them.</li>
     </ol>
@@ -738,6 +679,41 @@
       </div>
     </div>
   </div>
+
+  <div class="scorecard">
+    <div class="scorecard-head">
+      <h2>Round 7 — Reservations Are Locked</h2>
+      <span class="tag">3 EDITS</span>
+    </div>
+    <div class="fix-list">
+      <div class="fix">
+        <div class="mark">24</div>
+        <div class="body"><b>Saturday dinner is booked — but at RPM Italian, not Ciccio Mio.</b> Confirmation #2110644285 via OpenTable, table for 6, 7:30 PM, 52 W Illinois St. Whatever happened with the Ciccio Mio Resy window, the reservation that actually landed is RPM Italian — updated the itinerary to match reality.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">25</div>
+        <div class="body"><b>Sunday dinner is booked — but at Sophia Steak Chicago, not Gilt Bar.</b> Confirmed via Resy, table for 6, 8:00 PM (not 7:00), 748 N State St. Same story — plans shifted, itinerary now reflects the actual reservation. Pushed the bar crawl to 10:00 PM to give dinner room to breathe.</div>
+      </div>
+      <div class="fix">
+        <div class="mark">26</div>
+        <div class="body"><b>Golf is booked — and it's exactly as planned.</b> Confirmation #667993496, Harborside Port Course, Monday 8:00 AM, all 6 players on a single tee time (no split groups). Added the dress code and payment details straight from the confirmation email: collared shirts required, soft spikes only, greens fee (plus 9% Chicago amusement tax) due on arrival.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scorecard">
+    <div class="scorecard-head">
+      <h2>Round 8 — Austin's Booking</h2>
+      <span class="tag">1 EDIT</span>
+    </div>
+    <div class="fix-list">
+      <div class="fix">
+        <div class="mark">27</div>
+        <div class="body"><b>Added the Chicago River Tiki Bar Cruise Austin booked — and rebuilt Saturday afternoon around it.</b> The old plan had a loose "1.5–2 hour" Millennium Park → Riverwalk → Navy Pier loop ending around 6:15 PM. The cruise boards at 355 E Riverwalk South and requires arrival 30 min early, i.e. 4:30 PM sharp for a 5:00 PM departure — that's a hard deadline the loose loop would've blown right through. Tightened Mythical Kicks and Portillo's, cut the visit to The Bean down to a quick photo stop, and dropped Navy Pier and the Riverwalk stroll entirely since the cruise itself covers being on the water. Everything now points at boarding on time.</div>
+      </div>
+    </div>
+  </div>
+
   <footer>MADE FOR JOSH'S BACHELOR WEEKEND · GO FIRE</footer>
 </div>
 
@@ -775,16 +751,15 @@ window.addEventListener('load', function(){
     {name: 'Mythical Kicks', lat: 41.8925, lng: -87.6370},
     {name: "Portillo's", lat: 41.8928, lng: -87.6296},
     {name: 'Millennium Park / The Bean', lat: 41.8827, lng: -87.6233},
-    {name: 'Riverwalk', lat: 41.8875, lng: -87.6251},
-    {name: 'Navy Pier', lat: 41.8917, lng: -87.6086},
-    {name: 'Ciccio Mio', lat: 41.8886, lng: -87.6343},
+    {name: 'Tiki Bar Cruise Dock', lat: 41.8865, lng: -87.6178},
+    {name: 'RPM Italian', lat: 41.8917, lng: -87.6329},
     {name: "Bally's Casino", lat: 41.8917, lng: -87.6280}
   ]);
   buildMap('map-sun', [
     {name: 'Level Chicago', lat: 41.8917, lng: -87.6355},
     {name: "Lou Malnati's", lat: 41.8908, lng: -87.6342},
     {name: 'Soldier Field', lat: 41.8623, lng: -87.6167},
-    {name: 'Gilt Bar', lat: 41.8886, lng: -87.6344},
+    {name: 'Sophia Steak', lat: 41.8934, lng: -87.6285},
     {name: 'Machine Cocktail Bar', lat: 41.8925, lng: -87.6350},
     {name: 'HQ Beercade', lat: 41.8975, lng: -87.6345},
     {name: 'Dearly Beloved', lat: 41.8930, lng: -87.6355}
