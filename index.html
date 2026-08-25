@@ -262,7 +262,7 @@
       <span class="day-num">DAY 01</span>
       <h2>Saturday, Sept 12</h2>
     </div>
-    <div class="day-sub">ARRIVAL → TIKI CRUISE → DINNER → CASINO</div>
+    <div class="day-sub">ARRIVAL → TIKI CRUISE → DINNER → BAR CRAWL</div>
     <div id="map-sat" class="day-map"></div>
     <p class="map-caption">Approximate — for exact directions, use the address links in each stop below.</p>
 
@@ -361,9 +361,8 @@
     <div class="event">
       <div class="time">9:30P</div>
       <div>
-        <div class="title">Bally's Chicago Casino — Medinah Temple</div>
-        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Bally%27s+Chicago+600+N+Wabash+Ave+Chicago+IL">600 N Wabash Ave</a>. Slots, ~50 table games, open 24/7, no cover.</div>
-        <div class="meta"><span class="pill book">(888) 822-2559</span><span class="pill">~12 min walk from Level</span></div>
+        <div class="title">Bar crawl — River North</div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Machine+Cocktail+Bar+Chicago+IL">Machine Cocktail Bar</a> → <a href="https://www.google.com/maps/search/?api=1&query=HQ+Beercade+Chicago+IL">HQ Beer Cade</a> → <a href="https://www.google.com/maps/search/?api=1&query=Dearly+Beloved+Chicago+IL">Dearly Beloved</a>.</div>
       </div>
     </div>
   </div>
@@ -373,7 +372,7 @@
       <span class="day-num">DAY 02</span>
       <h2>Sunday, Sept 13</h2>
     </div>
-    <div class="day-sub">F1 RACING → DEEP DISH → FIRE VS. REVOLUTION → BAR CRAWL</div>
+    <div class="day-sub">F1 RACING → DEEP DISH → FIRE VS. REVOLUTION → CASINO</div>
     <div id="map-sun" class="day-map"></div>
     <p class="map-caption">Approximate — for exact directions, use the address links in each stop below.</p>
 
@@ -461,8 +460,9 @@
     <div class="event">
       <div class="time">10:00P</div>
       <div>
-        <div class="title">Bar crawl — River North</div>
-        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Machine+Cocktail+Bar+Chicago+IL">Machine Cocktail Bar</a> → <a href="https://www.google.com/maps/search/?api=1&query=HQ+Beercade+Chicago+IL">HQ Beer Cade</a> → <a href="https://www.google.com/maps/search/?api=1&query=Dearly+Beloved+Chicago+IL">Dearly Beloved</a>.</div>
+        <div class="title">Bally's Chicago Casino — Medinah Temple</div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Bally%27s+Chicago+600+N+Wabash+Ave+Chicago+IL">600 N Wabash Ave</a>. Slots, ~50 table games, open 24/7, no cover.</div>
+        <div class="meta"><span class="pill book">(888) 822-2559</span><span class="pill">~12 min walk from Level</span></div>
       </div>
     </div>
   </div>
@@ -768,6 +768,19 @@
     </div>
   </div>
 
+  <div class="scorecard">
+    <div class="scorecard-head">
+      <h2>Round 11 — Night Swap</h2>
+      <span class="tag">1 EDIT</span>
+    </div>
+    <div class="fix-list">
+      <div class="fix">
+        <div class="mark">33</div>
+        <div class="body"><b>Swapped the bar crawl to Saturday night, the casino to Sunday night.</b> Same time slots as before (9:30 PM Saturday, 10:00 PM Sunday) — just traded which activity sits where, since Saturday's the better night for the bar scene. Both day maps updated to match.</div>
+      </div>
+    </div>
+  </div>
+
   <footer>MADE FOR JOSH'S BACHELOR WEEKEND · GO FIRE</footer>
 </div>
 
@@ -807,7 +820,9 @@ window.addEventListener('load', function(){
     {name: 'Millennium Park / The Bean', lat: 41.8827, lng: -87.6233},
     {name: 'Tiki Bar Cruise Dock', lat: 41.8865, lng: -87.6178},
     {name: 'RPM Italian', lat: 41.8917, lng: -87.6329},
-    {name: "Bally's Casino", lat: 41.8917, lng: -87.6280}
+    {name: 'Machine Cocktail Bar', lat: 41.8925, lng: -87.6350},
+    {name: 'HQ Beercade', lat: 41.8975, lng: -87.6345},
+    {name: 'Dearly Beloved', lat: 41.8930, lng: -87.6355}
   ]);
   buildMap('map-sun', [
     {name: 'Level Chicago', lat: 41.8917, lng: -87.6355},
@@ -815,9 +830,7 @@ window.addEventListener('load', function(){
     {name: "Lou Malnati's", lat: 41.8908, lng: -87.6342},
     {name: 'Soldier Field', lat: 41.8623, lng: -87.6167},
     {name: 'Sophia Steak', lat: 41.8934, lng: -87.6285},
-    {name: 'Machine Cocktail Bar', lat: 41.8925, lng: -87.6350},
-    {name: 'HQ Beercade', lat: 41.8975, lng: -87.6345},
-    {name: 'Dearly Beloved', lat: 41.8930, lng: -87.6355}
+    {name: "Bally's Casino", lat: 41.8917, lng: -87.6280}
   ]);
   buildMap('map-mon', [
     {name: 'Level Chicago', lat: 41.8917, lng: -87.6355},
