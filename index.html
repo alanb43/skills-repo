@@ -374,37 +374,59 @@
       <span class="day-num">DAY 02</span>
       <h2>Sunday, Sept 13</h2>
     </div>
-    <div class="day-sub">CLASSICS → RECOVER → FIRE VS. REVOLUTION → BAR CRAWL</div>
+    <div class="day-sub">F1 RACING → DEEP DISH → FIRE VS. REVOLUTION → BAR CRAWL</div>
     <div id="map-sun" class="day-map"></div>
     <p class="map-caption">Approximate — for exact directions, use the address links in each stop below.</p>
 
     <div class="event">
-      <div class="time">11:00A</div>
+      <div class="time">10:45A</div>
       <div>
-        <div class="title">Coffee, easy morning</div>
-        <div class="desc">No golf today — Sunday's built around the game, so the morning is unhurried. Hot dog's already checked off from yesterday, so it's just the pizza today.</div>
+        <div class="title">Coffee, head out</div>
+        <div class="desc">No golf today, but the morning's not as open as it used to be — F1 check-in is a hard time.</div>
       </div>
     </div>
 
     <div class="event">
-      <div class="time">12:30P</div>
+      <div class="time">11:30A</div>
       <div>
-        <div class="title">Deep dish — Lou Malnati's</div>
-        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Lou+Malnati%27s+439+N+Wells+St+Chicago+IL">439 N Wells St, River North</a>. Call or order online ~30 min ahead — deep dish takes 30–45 min to bake, so a head start means it's ready when you sit down.</div>
-        <div class="meta"><span class="pill book">(312) 828-9800</span></div>
+        <div class="title">Walk to F1 Arcade Chicago</div>
+        <div class="desc">Also on Grand Ave, about a 10–15 min walk east from the apartment (or a quick rideshare). Check-in is 15 min before the booking time — no buffer to spare here.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">12:00P</div>
+      <div>
+        <div class="title">F1® Immersive Racing Simulator Experience <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· BOOKED</span></div>
+        <div class="desc">Booked by Austin — 6 adults, $228 total, via GetYourGuide. With 6 of you, this runs as team racing (split into two teams of 3) rather than head-to-head, with multiple races across tracks. There's a food/drink bar on site (Octane Bar) if anyone wants to eat there instead of the deep dish stop below.</div>
+        <div class="meta">
+          <span class="pill book">(312) 376-3131</span>
+          <span class="pill">6 adults</span>
+          <span class="pill turf">Booking #GYGWZAM2LH3Z, PIN RV1EW&BU</span>
+        </div>
+        <div class="note"><b>Arrive 11:45 AM for check-in</b> — meet at <a href="https://www.google.com/maps/search/?api=1&query=F1+Arcade+Chicago+1+W+Grand+Ave+Chicago+IL+60610">1 W Grand Ave</a>. No bare feet, no unaccompanied minors. Flashing lights and full-motion simulators — worth knowing if anyone's photosensitive or prone to motion sickness.</div>
       </div>
     </div>
 
     <div class="event">
       <div class="time">1:45P</div>
       <div>
-        <div class="title">Back to the apartment — rest, digest</div>
-        <div class="desc">Let the deep dish settle before pregame starts.</div>
+        <div class="title">Deep dish — Lou Malnati's</div>
+        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Lou+Malnati%27s+439+N+Wells+St+Chicago+IL">439 N Wells St, River North</a> — about a 10 min walk from F1 Arcade. Call and order ahead from the sim (around 1:15 PM) so it's ready when you sit down — deep dish takes 30–45 min to bake. Skip this one if racing runs long or the group's already eaten at Octane Bar.</div>
+        <div class="meta"><span class="pill book">(312) 828-9800</span></div>
       </div>
     </div>
 
     <div class="event">
       <div class="time">2:30P</div>
+      <div>
+        <div class="title">Back to the apartment — rest, change</div>
+        <div class="desc">Tighter turnaround than before — this is now a quick reset, not a long digest.</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">2:45P</div>
       <div>
         <div class="title">Pregame — TBD</div>
         <div class="desc">Open slot — wherever you land on it. Leave enough time to get to Soldier Field before gates open at 3:30.</div>
@@ -714,6 +736,19 @@
     </div>
   </div>
 
+  <div class="scorecard">
+    <div class="scorecard-head">
+      <h2>Round 9 — Another Austin Booking</h2>
+      <span class="tag">1 EDIT</span>
+    </div>
+    <div class="fix-list">
+      <div class="fix">
+        <div class="mark">28</div>
+        <div class="body"><b>Added the F1® Arcade Racing Simulator Austin booked — and rebuilt Sunday's whole morning around it.</b> Check-in is 11:45 AM for a 12:00 PM session at F1 Arcade Chicago (1 W Grand Ave, also on Grand Ave, ~10–15 min walk from the apartment) — 6 adults, $228 total, team racing since the group's bigger than 3. That landed right on top of the old "easy morning, deep dish at 12:30" plan, so the morning's no longer unhurried: coffee got pulled earlier, deep dish got pushed to 1:45 PM (order-ahead so it's ready), and the post-lunch rest window got compressed to a quick reset instead of a long digest. Noted the venue has its own food/drink bar (Octane Bar) as a fallback if racing runs long or the group's already eaten.</div>
+      </div>
+    </div>
+  </div>
+
   <footer>MADE FOR JOSH'S BACHELOR WEEKEND · GO FIRE</footer>
 </div>
 
@@ -757,6 +792,7 @@ window.addEventListener('load', function(){
   ]);
   buildMap('map-sun', [
     {name: 'Level Chicago', lat: 41.8917, lng: -87.6355},
+    {name: 'F1 Arcade Chicago', lat: 41.8917, lng: -87.6280},
     {name: "Lou Malnati's", lat: 41.8908, lng: -87.6342},
     {name: 'Soldier Field', lat: 41.8623, lng: -87.6167},
     {name: 'Sophia Steak', lat: 41.8934, lng: -87.6285},
