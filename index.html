@@ -174,6 +174,17 @@
     padding-left:10px;
   }
   .note b{color:var(--paper-dim);}
+  .choice-box{
+    background:var(--navy-panel);
+    border:1px dashed var(--line);
+    padding:16px 18px;
+    margin-top:8px;
+    font-size:14px;
+    color:var(--paper-dim);
+  }
+  .choice-box .ch-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.1em;margin-bottom:8px;display:block;}
+  .choice-box ul{margin:0;padding-left:18px;}
+  .choice-box li{margin-bottom:4px;}
   .decisions{
     margin:56px 0;
     background:var(--navy-panel);
@@ -357,6 +368,7 @@
         <div class="note"><b>Booked via OpenTable:</b> confirmed for 7:30 PM under Alan Bergsneider.
       </div>
     </div>
+    </div>
 
     <div class="event">
       <div class="time">9:30P</div>
@@ -379,8 +391,9 @@
     <div class="event">
       <div class="time">10:00A</div>
       <div>
-        <div class="title">Breakfast, head out</div>
-        <div class="desc">Chill morning after bar crawl, breakfast somewhere close by.</div>
+        <div class="title">Breakfast — Beatrix (River North)</div>
+        <div class="desc">Chill morning after the bar crawl. <a href="https://www.google.com/maps/search/?api=1&query=Beatrix+519+N+Clark+St+Chicago+IL">519 N Clark St</a> — about a 10 min walk, weekend brunch from 8 AM so there's no rush. Big, easy menu, good for a group that's feeling rough.</div>
+        <div class="meta"><span class="pill book">(312) 284-1377</span></div>
       </div>
     </div>
 
@@ -455,7 +468,7 @@
       <span class="day-num">DAY 03</span>
       <h2>Monday, Sept 14</h2>
     </div>
-    <div class="day-sub">FULL 18 AT HARBORSIDE → TRADING CARDS → DEPART</div>
+    <div class="day-sub">FULL 18 AT HARBORSIDE → DEPART</div>
     <div id="map-mon" class="day-map"></div>
     <p class="map-caption">Approximate — for exact directions, use the address links in each stop below.</p>
 
@@ -493,6 +506,21 @@
     </div>
 
     <div class="event">
+      <div class="time">2:00P</div>
+      <div>
+        <div class="title">A few hours open before the train</div>
+        <div class="desc">Roughly 2–2.5 hours free after golf — pick one.</div>
+        <div class="choice-box">
+          <span class="ch-label">PICK ONE</span>
+          <ul>
+            <li><b>Five Iron Golf</b> (<a href="https://www.google.com/maps/search/?api=1&query=Five+Iron+Golf+609+N+Dearborn+St+Chicago+IL">609 N Dearborn St</a>) — indoor golf simulators, duckpin bowling, full bar. A funny follow-up to the real round, and only a 6–8 min walk from the apartment. (800) 513-5155.</li>
+            <li><b>Chicago Sports Museum</b> (<a href="https://www.google.com/maps/search/?api=1&query=Chicago+Sports+Museum+835+N+Michigan+Ave+Chicago+IL">835 N Michigan Ave</a>, Water Tower Place, Level 7) — interactive Chicago sports memorabilia and challenges, ~45 min, $10/person. Connected to Harry Caray's if anyone wants a bite. (312) 202-0500.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="event">
       <div class="time">4:30P</div>
       <div><div class="title">Head back to Level to grab bags, then to Union Station</div><div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Chicago+Union+Station+225+S+Canal+St+Chicago+IL">225 S Canal St</a>. Build in real buffer here — this is the one hard deadline of the trip for 4 of you.</div></div>
     </div>
@@ -506,9 +534,7 @@
     </div>
   </div>
 
-  <div style="margin-top:56px;padding-top:20px;border-top:1px solid var(--line);">
-    <div style="font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:13px;font-weight:600;color:var(--gold);">Revision Notes</div>
-  </div>
+
     
   <footer>MADE FOR JOSH'S BACHELOR WEEKEND · GO J & L CUNNINGHAM</footer>
 </div>
@@ -556,7 +582,6 @@ window.addEventListener('load', function(){
   buildMap('map-sun', [
     {name: 'Level Chicago', lat: 41.8917, lng: -87.6355},
     {name: 'F1 Arcade Chicago', lat: 41.8917, lng: -87.6280},
-    {name: "Lou Malnati's", lat: 41.8908, lng: -87.6342},
     {name: 'Soldier Field', lat: 41.8623, lng: -87.6167},
     {name: 'Sophia Steak', lat: 41.8934, lng: -87.6285},
     {name: "Bally's Casino", lat: 41.8917, lng: -87.6280}
@@ -564,7 +589,6 @@ window.addEventListener('load', function(){
   buildMap('map-mon', [
     {name: 'Level Chicago', lat: 41.8917, lng: -87.6355},
     {name: 'Harborside Golf', lat: 41.6935, lng: -87.5309},
-    {name: 'Windy City Sports Cards', lat: 41.8917, lng: -87.6797},
     {name: 'Union Station', lat: 41.8789, lng: -87.6394}
   ]);
 });
