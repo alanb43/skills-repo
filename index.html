@@ -304,36 +304,26 @@
     <div class="event">
       <div class="time">2:45P</div>
       <div>
+        <div class="title">Bar + grub — Jake Melnick's Corner Tap <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· PRIORITY #1</span></div>
+        <div class="desc">Real sit-down time, not a quick stop — this is the priority for the afternoon. <a href="https://www.google.com/maps/search/?api=1&query=Jake+Melnick%27s+Corner+Tap+41+E+Superior+St+Chicago+IL">41 E Superior St</a>, about a 12 min walk from the apartment. Known for its wings (Today Show's pick for best in the US), full bar, good beer list, patio when the weather's right.</div>
+        <div class="meta"><span class="pill book">(312) 266-0400</span></div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="time">3:45P</div>
+      <div>
         <div class="title">Mythical Kicks — River North</div>
-        <div class="desc">A well-regarded <a href="https://www.google.com/maps/search/?api=1&query=Mythical+Kicks+Chicago+IL">sneaker boutique</a> a few blocks from the apartment — hits Josh's "cool shit" bonus interest right at the start of the touristy stretch. Keep it to 20–25 min — the afternoon's tighter now with Devil Dawgs added below.</div>
+        <div class="desc">A well-regarded <a href="https://www.google.com/maps/search/?api=1&query=Mythical+Kicks+Chicago+IL">sneaker boutique</a> a few blocks from the apartment — hits Josh's "cool shit" bonus interest. Keep it to 15–20 min, the walk to the dock after this doesn't leave much slack.</div>
         <div class="meta"><span class="pill">River North</span><span class="pill">~5 min walk from Level</span></div>
       </div>
     </div>
 
     <div class="event">
-      <div class="time">3:15P</div>
-      <div>
-        <div class="title">Chicago dog — Devil Dawgs <span style="color:var(--turf);font-family:'IBM Plex Mono',monospace;font-size:12px;">· UPGRADED</span></div>
-        <div class="desc"><a href="https://www.google.com/maps/search/?api=1&query=Devil+Dawgs+804+N+Rush+St+Chicago+IL">804 N Rush St, Gold Coast</a>. A local favorite rather than the tourist-line version — Vienna Beef dog, hand-cut fries, and a chili cheese dog worth trying too. It's a real detour though — north in Gold Coast, off the direct path to Millennium Park — so this whole afternoon runs about 15 min tighter than before to absorb the extra walking.</div>
-        <div class="meta">
-          <span class="pill book">(312) 929-4757</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="event">
-      <div class="time">3:40P</div>
-      <div>
-        <div class="title">Quick stop — The Bean</div>
-        <div class="desc">A fast photo-op detour at <a href="https://www.google.com/maps/search/?api=1&query=Cloud+Gate+Millennium+Park+Chicago+IL">Cloud Gate in Millennium Park</a> — about a 20 min walk south from Devil Dawgs, then 10 minutes, tops, once there. The boarding time below is a hard stop, so don't linger.</div>
-      </div>
-    </div>
-
-    <div class="event">
-      <div class="time">4:00P</div>
+      <div class="time">4:05P</div>
       <div>
         <div class="title">Walk to the dock</div>
-        <div class="desc">From Millennium Park to <a href="https://www.google.com/maps/search/?api=1&query=355+E+Riverwalk+South+Chicago+IL+60601">355 E Riverwalk South</a> is about a 10–15 min walk along the Riverwalk. Boarding requires arrival 30 min ahead of departure — this gets you there with only a few minutes to spare, so don't dawdle at the Bean.</div>
+        <div class="desc">About a 20–25 min walk from River North to <a href="https://www.google.com/maps/search/?api=1&query=355+E+Riverwalk+South+Chicago+IL+60601">355 E Riverwalk South</a>. Boarding requires arrival 30 min ahead of departure — this gets you there right around 4:30, so no dawdling.</div>
       </div>
     </div>
 
@@ -530,7 +520,20 @@
 
 
     
-  <footer>MADE FOR JOSH'S BACHELOR WEEKEND · GO J & L CUNNINGHAM</footer>
+    <div class="scorecard">
+    <div class="scorecard-head">
+      <h2>Saturday Reorder</h2>
+      <span class="tag">1 EDIT</span>
+    </div>
+    <div class="fix-list">
+      <div class="fix">
+        <div class="mark">35</div>
+        <div class="body"><b>Made bar + food priority #1 right after check-in, ahead of the shoe shop.</b> Swapped in Jake Melnick's Corner Tap (41 E Superior St, famous wings, 12 min walk) for real sit-down time, then Mythical Kicks after. <span class="was">To make room, cut Devil Dawgs and the Millennium Park/Bean photo stop — there wasn't time for both a proper bar hang and everything else before the 4:30 boarding deadline.</span> If you want the hot dog back in somewhere, Sunday's got a gap between F1 and pregame that could fit it.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer><footer>MADE FOR JOSH'S BACHELOR WEEKEND · GO J & L CUNNINGHAM</footer>
 </div>
 
 <script>
@@ -564,9 +567,8 @@ function buildMap(id, stops){
 window.addEventListener('load', function(){
   buildMap('map-sat', [
     {name: 'Level Chicago', lat: 41.8917, lng: -87.6355},
+    {name: "Jake Melnick's", lat: 41.8951, lng: -87.6289},
     {name: 'Mythical Kicks', lat: 41.8925, lng: -87.6370},
-    {name: "Devil Dawgs", lat: 41.8994, lng: -87.6255},
-    {name: 'Millennium Park / The Bean', lat: 41.8827, lng: -87.6233},
     {name: 'Tiki Bar Cruise Dock', lat: 41.8865, lng: -87.6178},
     {name: 'RPM Italian', lat: 41.8917, lng: -87.6329},
     {name: 'Machine Cocktail Bar', lat: 41.8925, lng: -87.6350},
